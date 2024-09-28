@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Venyx-Style UI in Vanilla JavaScript with Minimize Feature
 // @namespace    http://violentmonkey.net/
-// @version      1.3
+// @version      1.5
 // @description  A draggable Venyx-like interface with page navigation, sections, slider value, and top title using plain JavaScript
 // @author       You
-// @match        https://discord.com/*
+// @match        *://*/*
 // @grant        none
 // ==/UserScript==
 
@@ -21,13 +21,27 @@
     container.style.left = '50px';
     container.style.borderRadius = '10px';
     container.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-    container.style.zIndex = '1000';
+    container.style.zIndex = '9999'; // Ensure the container is always on top
     container.style.display = 'flex';
     container.style.flexDirection = 'column';
     container.style.color = 'white';
     container.style.fontFamily = 'Arial, sans-serif';
     container.style.fontSize = '12px';
-    container.style.cursor = 'move'; // Change cursor to move when hovering
+
+    // Title Bar
+    const titleBar = document.createElement('div');
+    titleBar.innerText = 'Protorn';
+    titleBar.style.width = '100%';
+    titleBar.style.padding = '10px';
+    titleBar.style.backgroundColor = '#7289da';
+    titleBar.style.color = 'white';
+    titleBar.style.fontSize = '16px';
+    titleBar.style.textAlign = 'center';
+    titleBar.style.fontWeight = 'bold';
+    titleBar.style.borderTopLeftRadius = '10px';
+    titleBar.style.borderTopRightRadius = '10px';
+    titleBar.style.position = 'relative';
+    titleBar.style.boxSizing = 'border-box'; // Include padding in width
 
     // Draggable functionality
     let isDragging = false;
@@ -53,21 +67,6 @@
     document.addEventListener('mouseup', () => {
         isDragging = false;
     });
-
-    // Title Bar
-    const titleBar = document.createElement('div');
-    titleBar.innerText = 'Protorn';
-    titleBar.style.width = '100%';
-    titleBar.style.padding = '10px';
-    titleBar.style.backgroundColor = '#7289da';
-    titleBar.style.color = 'white';
-    titleBar.style.fontSize = '16px';
-    titleBar.style.textAlign = 'center';
-    titleBar.style.fontWeight = 'bold';
-    titleBar.style.borderTopLeftRadius = '10px';
-    titleBar.style.borderTopRightRadius = '10px';
-    titleBar.style.position = 'relative';
-    titleBar.style.boxSizing = 'border-box'; // Include padding in width
 
     // Minimize Button
     const minimizeButton = document.createElement('button');
@@ -223,9 +222,9 @@
                 input.innerText = item.label;
                 input.style.padding = '5px 10px';
                 input.style.backgroundColor = '#7289da';
-                input.style.color = 'white';
                 input.style.border = 'none';
                 input.style.borderRadius = '5px';
+                input.style.color = 'white';
                 input.style.cursor = 'pointer';
 
                 // Add hover effect
